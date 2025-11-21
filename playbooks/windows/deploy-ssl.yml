@@ -6,4 +6,4 @@
   tasks:
     - name: Install iisssl
       ansible.builtin.import_role:
-        name: windows-iis-certificate
+        name: win-iis-ssl
