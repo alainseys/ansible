@@ -1,0 +1,26 @@
+- name: ssl deployment
+  hosts: all
+  become: true
+  vars:
+    debug_enabled_default: false
+  tasks:
+    - name: Deploy wildcard certificate to the selected host
+      ansible.builtin.import_role:
+        name: linux-ssl
+      vars:
+        ssl_deploy_mode: specific
+        ssl_specific_certificates:
+          - yourcert.crt
+          - yourkey.key
+        ssl_specific_hosts:
+          - ALAIN-TEST
+          - DEBIAN-TEST
+
+    - name: Deploy all SSL certs to NGINX
+      ansible.builtin.import_role:
+        name: linux-ssl
+      vars:
+        ssl_deploy_mode: all
+      when:
+        - ansible_os_family in ['RedHat', 'Rockey', 'Fedora', 'Debian']
+        - inventory_hostname == 'NGINX-01'

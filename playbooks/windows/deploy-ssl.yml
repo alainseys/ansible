@@ -1,0 +1,9 @@
+- name: ALAIN-TEST2
+  hosts: ALAIN-TEST2
+  become: true
+  vars:
+    iis_website_name: 'Default Web Site'
+  tasks:
+    - name: Install iisssl
+      ansible.builtin.import_role:
+        name: windows-iis-certificate
