@@ -1,0 +1,8 @@
+.ansible/*
+ssh_private
+private_key
+inventory.yml
+inventory.yaml
+playbooks/windows/temp_cert/*.pem
+playbooks/windows/temp_certs/*.crt
+playbooks/windows/temp_certs/*.key
