@@ -1,0 +1,19 @@
+   - name: Create users
+      ansible.builtin.include_role:
+        name: linux-users
+        vars:
+          users:
+            - username: user1
+              # SHA-256 crypted
+              password: $5$3AtlICnui4CgSRUd$MHbK.DYqzJibaonwKeFQTNwqgWIQt0B.uS8OFQdAe72
+              update_password: always
+              comment: "Account {{ username }} created by ansible"
+              shell: /bin/bash
+              ssh_key: "{{ lookup('file', ssh_keys/{{ username }}.pub) }}"
+              use_sudo: true
+              user_state: present
+              # Determine on what distributions this is running and assign to correct naming for root
+              groups: "{{ 'wheel,docker' if ansible_facts['distribution'] == 'RedHat' else 'sudo,docker'}}"
+              # Here you can call the hostgroup in awx or hostname of the vm itself
+              server:
+                - all 
