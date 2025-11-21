@@ -1,0 +1,50 @@
+{
+  "name": "ansible-dev-container-podman",
+  "build": {
+    "context": "..",
+    "dockerfile": "Dockerfile"
+  },
+  //"image": "ghcr.io/ansible/community-ansible-dev-tools:latest",
+  "containerUser": "root",
+  "runArgs": [
+    "--cap-add=CAP_MKNOD",
+    "--cap-add=NET_ADMIN",
+    "--cap-add=SYS_ADMIN",
+    "--cap-add=SYS_RESOURCE",
+    "--device",
+    "/dev/fuse",
+    "--security-opt",
+    "seccomp=unconfined",
+    "--security-opt",
+    "label=disable",
+    "--security-opt",
+    "apparmor=unconfined",
+    "--security-opt",
+    "unmask=/sys/fs/cgroup",
+    "--userns=host",
+    "--hostname=ansible-dev-container",
+    "--add-host=host.docker.internal:host-gateway",
+    "--env=DOCKER_HOST=tcp://host.docker.internal:2376"
+  ],
+  "remoteEnv": {
+    "DOCKER_HOST": "tcp://host.docker.internal:2376"
+  },
+
+  // This runs once right after the container is created and the workspace is mounted
+  "postCreateCommand": "git config --global --add safe.directory '*' &&  git config pull.rebase true && ansible-galaxy collection install -r requirements.yml --force",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "redhat.ansible",
+        "oderwat.indent-rainbow",
+        "srobert0560.sr-ansible-snippets",
+        "donjayamanne.githistory",
+        "eamodio.gitlens",
+        "ryanolsonx.solarized",
+        "emmanuelbeziat.vscode-great-icons",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  }
+}
