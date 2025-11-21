@@ -1,0 +1,11 @@
+    - name: Deploy firewall
+      ansible.builtin.include_role:
+        name: linux-firewall
+      vars:
+# If rules needs to be deleted hostname should remain
+# New rule requires hostname known as in awx port name and protocol
+        firewalld_rules:
+          RELAY-01:
+            - port: 25/tcp
+            - port: 587/tcp
+            - port: 123/udp
