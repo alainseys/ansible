@@ -45,10 +45,11 @@ RUN apt-get update && \
 #    python3-dev \
 #    libkrb5-dev \
 #    gss-ntlmssp
-RUN git config --global user.email "alain.seys@vanmarcke.be"
+RUN git config --global user.email "alain.seys@outlook.com"
 RUN git config --global user.name "Alain Seys"
 COPY requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
+
 # Change Back to correct workdir
 WORKDIR ${WORKSPACE_BASE_PATH}
