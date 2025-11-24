@@ -19,7 +19,8 @@ RUN echo 'SSHD: ALL' >> /etc/hosts.allow
 # Upgrade pip and install necessary Python packages
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install ansible ansible-lint ansible-dev-tools ansible-builder ansible-creator ansible-navigator pywinrm molecule pyVmomi requests \
-    docker netmiko yamllint dnspython pytest-molecule
+    docker netmiko yamllint dnspython pytest-molecule podman
+
 
 
 # Set up bash aliases and environment variables
@@ -38,6 +39,8 @@ RUN apt-get update && \
     apt-get install -y docker-ce-cli && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+
 
 # Kerberos requirements
 #RUN apt-get update && \ 

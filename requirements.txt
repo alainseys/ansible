@@ -8,8 +8,11 @@ ansible-navigator
 pywinrm
 pyVmomi
 requests
-molecule
 docker
+podman
+testinfra
+flake8
+molecule
 molecule-docker
 molecule-podman
 pytest-molecule
