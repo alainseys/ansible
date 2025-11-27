@@ -1,0 +1,20 @@
+---
+- name: Manage filesystem mounts
+  ansible.builtin.include_role:
+    name: mounts
+  vars:
+    mounts:
+      SERVER-01:
+        mount: /mnt/shared
+        src: 192.168.1.66:/linux/ansible
+        fstype: nfs
+        opts: vers=4.1,defaults,rw,hard,intr,tcp
+        mount_state: 'present' # absent, present
+
+      SERVER-02:
+        mount: /mnt/shared
+        src: 192.168.1.66:/linux/ansible
+        fstype: nfs
+        opts: vers=4.1,defaults,rw,hard,intr,tcp
+        mount_state: 'present' # absent, present
+
